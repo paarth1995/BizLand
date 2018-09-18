@@ -1,0 +1,44 @@
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+  <script>
+    $(document).ready(function () {
+      // Init Sidenav
+      $('.button-collapse').sideNav();
+      $('.scrollspy').scrollSpy();
+      //Scrollfire
+      const options = [
+        {
+          selector: '.main-text', offset: 0, callback: function (el) {
+            Materialize.fadeInImage($(el));
+          }
+        },
+        {
+          selector: '.navbar-fixed', offset: 1500, callback: function () {
+            $('nav').removeClass('transparent');
+            $('nav').addClass('blue-grey darken-3');
+          }
+        }
+      ];
+
+      Materialize.scrollFire(options);
+
+      const position = [41.836604, -87.615986];
+      const centerPosition = [41.836604, -87.615986];
+
+      function showGoogleMaps() {
+        const latLng = new google.maps.LatLng(position[0], position[1]);
+        const centerlatLng = new google.maps.LatLng(centerPosition[0], centerPosition[1]);
+
+        const mapOptions = {
+          zoom: 12,
+          streetViewControl: false,
+          scaleControl: true,
+          mapTypeId: google.maps.mapTypeId.ROADMAP,
+          center: centerLatLng
+        }
+        map = new google.maps.Map(document.getElementById('googlemap'), mapOptions);
+        //Marker
+        marker = new google.maps.Marker({
+          position: LatLng,
+          map: map,
+          draggable: false,
+          animation: google.maps.Animation.DROP
